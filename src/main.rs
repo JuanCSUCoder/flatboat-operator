@@ -1,4 +1,5 @@
 mod k8s;
+mod crds;
 
 use tracing::{info, debug};
 
