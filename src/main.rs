@@ -1,9 +1,13 @@
+mod k8s;
+
 use tracing::{info, debug};
+
+use crate::k8s::ApisInitError;
 
 #[derive(thiserror::Error, Debug)]
 enum OperatorError {
-    #[error("Kubernetes client error: {0}")]
-    KubeError(#[from] kube::Error),
+    #[error("Unable to initialize Kubernetes APIs: {0}")]
+    KubeError(#[from] ApisInitError),
 }
 
 type ProgramResult = Result<(), OperatorError>;
@@ -14,9 +18,10 @@ async fn main() -> ProgramResult {
     tracing_subscriber::fmt::init();
     info!("Starting flatboat operator...");
 
-    // 2. Create Kubernetes client
-    let client = kube::Client::try_default().await?;
-    debug!("Kubernetes client created successfully");
+    // 2. Initialize Kubernetes APIs
+    info!("Initializing Kubernetes APIs...");
+    let apis = k8s::initialize_apis().await?;
+    debug!("Kubernetes APIs initialized successfully");
 
     return Ok(());
 }
