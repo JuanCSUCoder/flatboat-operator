@@ -1,5 +1,6 @@
 services:
   flatboat-operator:
+    image: juancsucoder/flatboat-operator
     build:
       context: .
       dockerfile: Dockerfile
