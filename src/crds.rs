@@ -6,6 +6,17 @@ use schemars::JsonSchema;
 #[kube(group = "flatboat.juancsu.coder", version = "v0.6.0", kind = "FlatboatWorkload", namespaced)]
 #[kube(status = "FlatboatWorkloadStatus")]
 pub struct FlatboatWorkloadSpec {
+    image: String,
+    launch_executable: String,
+    args: Vec<String>,
+    runs_on: FlatboatWorkloadNodeSelector
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub enum FlatboatWorkloadNodeSelector {
+    Robot,
+    GPU,
+    CPU,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
