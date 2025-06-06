@@ -1,9 +1,13 @@
-mod k8s;
+mod apis;
 mod crds;
+mod controller;
 
-use tracing::{info, debug};
+use std::{error, sync::Arc};
 
-use crate::k8s::ApisInitError;
+use kube::{api::ListParams, runtime::{watcher::Config, Controller}};
+use tracing::{debug, info, warn};
+
+use crate::apis::ApisInitError;
 
 #[derive(thiserror::Error, Debug)]
 enum OperatorError {
@@ -21,8 +25,28 @@ async fn main() -> ProgramResult {
 
     // 2. Initialize Kubernetes APIs
     info!("Initializing Kubernetes APIs...");
-    let apis = k8s::initialize_apis().await?;
+    let apis = apis::initialize_apis().await?;
     debug!("Kubernetes APIs initialized successfully");
+
+    // 3. Create the CRD controller
+    info!("Operator started successfully!");
+    let controller: Controller<crds::FlatboatWorkload> = 
+        Controller::new(apis.workload, Config::default())
+            .owns(apis.jobs, Config::default())
+            .owns(apis.nodes, Config::default())
+            .run(
+                controller::reconcile,
+                controller::error_policy,
+                Arc::new(apis),
+            )
+            .for_each(|res| async move {
+                match res {
+                    Ok(o) => info!("Reconciled: {:?}", o),
+                    Err(e) => warn!("Unable to reconcile: {:?}", e)
+                }
+            });
+    
+    info!("Operator stopped.");
 
     return Ok(());
 }

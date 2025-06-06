@@ -21,6 +21,12 @@ pub enum FlatboatWorkloadNodeSelector {
     CPU,
 }
 
+impl Default for FlatboatWorkloadNodeSelector {
+    fn default() -> Self {
+        FlatboatWorkloadNodeSelector::CPU
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum FlatboatWorkloadStatus {
     Running,
