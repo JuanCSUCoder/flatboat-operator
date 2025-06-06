@@ -19,6 +19,7 @@ pub enum FlatboatWorkloadNodeSelector {
     Robot,
     GPU,
     CPU,
+    Any,
 }
 
 impl Default for FlatboatWorkloadNodeSelector {
