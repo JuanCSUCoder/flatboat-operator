@@ -9,6 +9,8 @@ pub struct FlatboatWorkloadSpec {
     image: String,
     launch_executable: String,
     args: Vec<String>,
+    #[schemars(default)]
+    #[serde(default = "default_node_selector")]
     runs_on: FlatboatWorkloadNodeSelector
 }
 
@@ -25,4 +27,8 @@ pub enum FlatboatWorkloadStatus {
     Finished,
     Reallocating,
     FailLoopBackoff,
+}
+
+fn default_node_selector() -> FlatboatWorkloadNodeSelector {
+    FlatboatWorkloadNodeSelector::CPU
 }
