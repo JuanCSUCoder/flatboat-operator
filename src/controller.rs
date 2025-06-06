@@ -14,8 +14,6 @@ pub async fn reconcile(
     _workload: Arc<crds::FlatboatWorkload>,
     _ctx: Arc<OperatorApis>
 ) -> Result<Action, ReconcileError> {
-  let client = ctx.clone();
-
   return Ok(Action::await_change());
 }
 
