@@ -1,0 +1,5 @@
+services:
+  flatboat-operator:
+    build:
+      context: .
+      dockerfile: Dockerfile
