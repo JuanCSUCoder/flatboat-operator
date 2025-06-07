@@ -1,4 +1,10 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: flatboat-operator
+
+---
+apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: flatboat-operator
@@ -54,6 +60,13 @@ spec:
         - name: flatboat-operator
           image: juancsucoder/flatboat-operator:latest
           imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           resources:
             requests:
               memory: "64Mi"
