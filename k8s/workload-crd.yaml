@@ -29,8 +29,8 @@ spec:
             - any
   scope: Namespaced
   names:
-    plural: workloads
-    singular: workload
+    plural: flatboatworkloads
+    singular: flatboatworkload
     kind: FlatboatWorkload
     shortNames:
     - wl

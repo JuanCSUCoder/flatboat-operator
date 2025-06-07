@@ -26,7 +26,7 @@ rules:
     resources: ["pods", "events"]
     verbs: ["get", "list", "watch"]
   - apiGroups: ["flatboat.juancsu.coder"]
-    resources: ["flatboatworkloads"]
+    resources: ["workloads", "flatboatworkloads"]
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 
 ---
