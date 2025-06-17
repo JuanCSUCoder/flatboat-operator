@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use kube::CustomResource;
 use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
@@ -46,4 +48,21 @@ pub enum FlatboatWorkloadStatus {
 
 fn default_node_selector() -> FlatboatWorkloadNodeSelector {
     FlatboatWorkloadNodeSelector::CPU
+}
+
+#[derive(CustomResource, Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+#[kube(group = "flatboat.juancsu.coder", version = "v6", kind = "FlatboatBot", namespaced)]
+#[kube(status = "FlatboatBotStatus")]
+pub struct FlatboatBotSpec {
+    node_name: String,
+    capabilities: HashMap<String, String>,
+    limitations: Vec<String>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub enum FlatboatBotStatus {
+    Idle,
+    Busy,
+    Offline,
 }
