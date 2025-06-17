@@ -92,12 +92,11 @@ spec:
                 - Idle
                 - Busy
                 - Offline
-  scope: Namespaced
+  scope: Cluster
   names:
-    plural: flatboatworkloads
-    singular: flatboatworkload
-    kind: FlatboatWorkload
+    plural: flatboatbots
+    singular: flatboatbot
+    kind: FlatboatBot
     shortNames:
-    - wl
-    - wls
-    - fwl
+    - bot
+    - bots
