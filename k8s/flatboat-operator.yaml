@@ -28,6 +28,15 @@ rules:
   - apiGroups: ["flatboat.juancsu.coder"]
     resources: ["flatboatworkloads"]
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["flatboat.juancsu.coder"]
+    resources: ["flatboatworkloads/status"]
+    verbs: ["get", "update", "patch"]
+  - apiGroups: ["flatboat.juancsu.coder"]
+    resources: ["flatboatbots"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["flatboat.juancsu.coder"]
+    resources: ["flatboatbots/status"]
+    verbs: ["get", "update", "patch"]
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
