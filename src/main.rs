@@ -2,11 +2,11 @@ mod apis;
 mod crds;
 mod controller;
 
-use std::{error, sync::Arc};
+use std::sync::Arc;
 
-use kube::{api::ListParams, runtime::{watcher::Config, Controller}};
-use tracing::{debug, info, warn};
+use kube::runtime::{watcher::Config, Controller};
 use futures::StreamExt;
+use tracing::{debug, info};
 
 use crate::apis::ApisInitError;
 

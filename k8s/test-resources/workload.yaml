@@ -4,6 +4,8 @@ metadata:
   name: example-workload
 spec:
   image: osrf/ros:jazzy-desktop-full
-  launch_executable: roslaunch
+  launch:
+    package: example_pkg
+    executable: example_node
   runsOn: any
   args: []

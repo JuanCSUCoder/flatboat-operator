@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use kube::{config::Context, runtime::controller::Action, Client};
+use kube::runtime::controller::Action;
 
 use crate::{apis::OperatorApis, crds};
 
