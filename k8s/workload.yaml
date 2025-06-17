@@ -2,8 +2,7 @@ apiVersion: flatboat.juancsu.coder/v6
 kind: FlatboatWorkload
 metadata:
   name: example-workload
-spec:
-  image: osrf/ros:jazzy-desktop-full
-  launch_executable: roslaunch
-  runsOn: any
-  args: []
+image: osrf/ros:jazzy-desktop-full
+launch_executable: roslaunch
+runsOn: any
+args: []
