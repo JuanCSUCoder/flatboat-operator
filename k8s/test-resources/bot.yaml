@@ -1,0 +1,13 @@
+apiVersion: flatboat.juancsu.coder/v6
+kind: FlatboatBot
+metadata:
+  name: example-bot
+spec:
+  nodeName: example-node
+  capabilities:
+    leftServo: "/dev/USB0"
+    rightServo: "/dev/USB1"
+  limitations:
+    - omnidirectional
+    - camera
+
