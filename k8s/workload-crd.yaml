@@ -12,21 +12,24 @@ spec:
       openAPIV3Schema:
         type: object
         properties:
-          image:
-            type: string
-          launch_executable:
-            type: string
-          args:
-            type: array
-            items:
-              type: string
-          runsOn:
-            type: string
-            enum:
-            - robot
-            - cpu
-            - gpu
-            - any
+          spec:
+            type: object
+            properties:
+              image:
+                type: string
+              launch_executable:
+                type: string
+              args:
+                type: array
+                items:
+                  type: string
+              runsOn:
+                type: string
+                enum:
+                - robot
+                - cpu
+                - gpu
+                - any
   scope: Namespaced
   names:
     plural: flatboatworkloads
