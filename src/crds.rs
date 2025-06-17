@@ -3,11 +3,12 @@ use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
 
 #[derive(CustomResource, Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
 #[kube(group = "flatboat.juancsu.coder", version = "v6", kind = "FlatboatWorkload", namespaced)]
 #[kube(status = "FlatboatWorkloadStatus")]
 pub struct FlatboatWorkloadSpec {
     image: String,
-    launch_executable: String,
+    launch: LaunchConfiguration,
     args: Vec<String>,
     #[schemars(default)]
     #[serde(default = "default_node_selector")]
@@ -20,6 +21,13 @@ pub enum FlatboatWorkloadNodeSelector {
     GPU,
     CPU,
     Any,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct LaunchConfiguration {
+    package: String,
+    executable: String,
 }
 
 impl Default for FlatboatWorkloadNodeSelector {

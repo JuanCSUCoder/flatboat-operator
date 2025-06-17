@@ -17,8 +17,13 @@ spec:
             properties:
               image:
                 type: string
-              launch_executable:
-                type: string
+              launch:
+                type: object
+                properties:
+                  package:
+                    type: string
+                  executable:
+                    type: string
               args:
                 type: array
                 items:
