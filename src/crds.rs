@@ -6,8 +6,7 @@ use schemars::JsonSchema;
 
 #[derive(CustomResource, Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
-#[kube(group = "flatboat.juancsu.coder", version = "v6", kind = "FlatboatWorkload", namespaced)]
-#[kube(status = "FlatboatWorkloadStatus")]
+#[kube(group = "flatboat.juancsu.coder", version = "v6", kind = "FlatboatWorkload", namespaced, status = "FlatboatWorkloadStatus")]
 pub struct FlatboatWorkloadSpec {
     image: String,
     launch: LaunchConfiguration,
@@ -18,6 +17,7 @@ pub struct FlatboatWorkloadSpec {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(rename_all = "camelCase")]
 pub enum FlatboatWorkloadNodeSelector {
     Robot,
     GPU,
@@ -39,6 +39,7 @@ impl Default for FlatboatWorkloadNodeSelector {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(rename_all = "camelCase")]
 pub enum FlatboatWorkloadStatus {
     Running,
     Finished,
@@ -52,8 +53,7 @@ fn default_node_selector() -> FlatboatWorkloadNodeSelector {
 
 #[derive(CustomResource, Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
-#[kube(group = "flatboat.juancsu.coder", version = "v6", kind = "FlatboatBot", namespaced)]
-#[kube(status = "FlatboatBotStatus")]
+#[kube(group = "flatboat.juancsu.coder", version = "v6", kind = "FlatboatBot", namespaced, status = "FlatboatBotStatus")]
 pub struct FlatboatBotSpec {
     node_name: String,
     capabilities: HashMap<String, String>,
@@ -61,6 +61,7 @@ pub struct FlatboatBotSpec {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(rename_all = "camelCase")]
 pub enum FlatboatBotStatus {
     Idle,
     Busy,
